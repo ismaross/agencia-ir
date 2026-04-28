@@ -1,0 +1,14 @@
+# Robots.txt - IR Marketing Digital
+# https://agenciair.com
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Sitemaps
+Sitemap: https://agenciair.com/sitemap.xml
+
+# Crawl delay (opcional)
+Crawl-delay: 1

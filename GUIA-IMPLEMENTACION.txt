@@ -1,0 +1,190 @@
+===============================================
+IR MARKETING DIGITAL — GUÍA DE IMPLEMENTACIÓN
+===============================================
+
+PASO 1: DESCARGAR EL PROYECTO
+- Descarga todos los archivos de ir-marketing/
+- Estructura carpetas locales
+
+PASO 2: SUBIR A HOSTING
+- Conecta via FTP/SFTP a tu hosting
+- Sube la carpeta "ir-marketing" completa
+- Asegúrate que:
+  * index.html esté en la raíz o carpeta pública
+  * Las subcarpetas (css/, js/, pages/, assets/) mantengan su estructura
+  * El hosting permita .html estático
+
+PASO 3: CONFIGURAR DOMINIO
+- En tu registrador (ej: Namecheap, GoDaddy):
+  * Agrega A records apuntando a tu hosting
+  * Espera 24-48hs para propagación DNS
+
+PASO 4: ACTIVAR HTTPS
+- La mayoría de hostings modernos ofrecen SSL gratis
+- Busca "SSL Certificate" en cPanel
+- Instala certificado (Usually Let's Encrypt es gratis)
+- Redirige HTTP a HTTPS (en .htaccess o hosting settings)
+
+PASO 5: CONFIGURAR FORMULARIO (elige una opción)
+
+OPCIÓN A: FORMSPREE (recomendado)
+1. Ve a https://formspree.io/
+2. Crea cuenta con tu email (agenciair@gmail.com)
+3. Crea nuevo formulario
+4. Obtendrás URL: https://formspree.io/f/xyzabc
+5. Abre js/main.js
+6. Busca: "const response = await fetch('https://formspree.io/f/xyzabc'"
+7. Reemplaza xyzabc con tu ID
+8. Descomenta esa sección (quita los /* */)
+9. Comenta las otras opciones
+
+OPCIÓN B: EMAILJS
+1. Ve a https://www.emailjs.com/
+2. Crea cuenta
+3. Conecta tu email (Gmail, Outlook, etc.)
+4. Obtén: PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID
+5. En js/main.js, encuentra la sección emailjs.init()
+6. Reemplaza los valores
+7. Descomenta esa sección
+8. Comenta las otras
+
+PASO 6: GOOGLE ANALYTICS
+1. Ve a https://analytics.google.com/
+2. Crea propiedad: agenciair.com
+3. Obtén ID de medición: G-XXXXXXXXXX
+4. En index.html, busca "G-XXXXXXXXXX" (aparece 2 veces)
+5. Reemplaza con tu ID
+
+PASO 7: GOOGLE SEARCH CONSOLE
+1. Ve a https://search.google.com/search-console/
+2. Agrega propiedad
+3. Verifica dominio (via DNS o archivo HTML)
+4. Sube sitemap.xml (ya incluido)
+5. Solicita indexación de home
+
+PASO 8: COMPLETAR PÁGINAS DE SERVICIOS
+Las páginas de servicios están en pages/servicios/:
+- seo.html (LISTO - plantilla lista)
+- redes-sociales.html (FALTA - copia seo.html y modifica)
+- email-marketing.html (FALTA)
+- pauta-paga.html (FALTA)
+- branding.html (FALTA)
+- diseno-web.html (FALTA)
+
+Para crear cada página:
+1. Copia seo.html
+2. Renómbrala
+3. Cambia:
+   - <title>
+   - <meta description>
+   - <h1> del hero
+   - El contenido específico del servicio
+   - Links en header/footer (verificar rutas)
+
+PASO 9: AGREGAR IMÁGENES
+- Crea carpeta assets/images/ (si no existe)
+- Comprime imágenes en https://tinypng.com/
+- Preferible usar WebP (.webp)
+- Tamaño recomendado: 1200x630px para OG images
+
+PASO 10: VERIFICACIONES FINALES
+
+SEO:
+[ ] Todos los títulos tienen keywords
+[ ] Meta descriptions completos
+[ ] Sitemap.xml existe
+[ ] Robots.txt existe
+[ ] Google Analytics funcionando
+[ ] Google Search Console conectada
+[ ] Schema markup visible (JSON-LD)
+
+PERFORMANCE:
+[ ] Google PageSpeed: >85/100
+[ ] Mobile: funciona en todos los dispositivos
+[ ] Formulario: envía correctamente
+[ ] WhatsApp: abre chat
+
+CONTENIDO:
+[ ] Números de contacto correctos
+[ ] Email correcto
+[ ] Todas las páginas de servicios completas
+[ ] Links internos funcionan
+[ ] Links a WhatsApp funcionan
+
+===============================================
+CAMBIOS COMUNES DESPUÉS DEL LANZAMIENTO
+===============================================
+
+CAMBIAR COLORES:
+1. Abre css/styles.css
+2. Busca :root { }
+3. Modifica --color-primary, --color-secondary, etc.
+
+CAMBIAR TEXTO:
+1. Abre index.html o la página específica
+2. Busca el texto
+3. Reemplaza directamente
+
+AGREGAR NUEVA SECCIÓN:
+1. En index.html, agrega <section>
+2. Usa clases existentes (service-grid, service-card, etc.)
+3. El CSS ya cubre la mayoría de casos
+
+CAMBIAR WHATSAPP:
+1. Abre index.html
+2. Busca "wa.me/59898640820"
+3. Reemplaza con tu número (con código país)
+
+===============================================
+SOPORTE & DEBUGGING
+===============================================
+
+El sitio no carga:
+- Verifica que paths en HTML sean correctos
+- Revisa Console del navegador (F12)
+- Asegúrate que .html esté accesible (no privado en FTP)
+
+Formulario no envía:
+- Verifica configuración (Formspree/EmailJS)
+- Abre Console (F12) y mira errores
+- Revisa que URLs estén correctas
+
+Analytics no funciona:
+- Verifica ID de Google Analytics
+- Espera 24hs para ver datos
+- Abre Console y busca "gtag"
+
+Mobile se ve raro:
+- Abre DevTools (F12)
+- Usa vista mobile
+- Revisa viewport meta tag en <head>
+
+===============================================
+PRÓXIMOS PASOS RECOMENDADOS
+===============================================
+
+CORTO PLAZO (primera semana):
+- Completar páginas de servicios
+- Configurar formulario
+- Lanzar a producción
+
+MEDIANO PLAZO (primer mes):
+- Crear contenido de blog (si lo deseas)
+- Hacer Google Ads / Meta Ads
+- Empezar SEO técnico
+
+LARGO PLAZO (primeros 3-6 meses):
+- Posicionamiento SEO
+- Email marketing
+- Estrategia de contenido
+
+===============================================
+CONTACTO
+===============================================
+
+María Amaya
++598 98 640 820
+agenciair@gmail.com
+Maldonado, Uruguay
+
+===============================================
