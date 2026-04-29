@@ -27,6 +27,55 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 });
 
 // ============================================
+// ANIMACIONES SCROLL-TRIGGERED
+// Intersection Observer (nativo, sin librerías)
+// ============================================
+
+function initScrollAnimations() {
+  // Verificar soporte
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: mostrar todos inmediatamente
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      el.classList.add('is-visible');
+    });
+    return;
+  }
+
+  // Opciones del observer
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -80px 0px', // Activar antes del final
+    threshold: 0.1
+  };
+
+  // Callback cuando entra en viewport
+  const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        // Dejar de observar después de activar
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+
+  // Crear observer
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+  // Observar todos los elementos animados
+  document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-up, .animate-scale-in').forEach(el => {
+    observer.observe(el);
+  });
+}
+
+// Iniciar cuando DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initScrollAnimations);
+} else {
+  initScrollAnimations();
+}
+
+// ============================================
 // FORMULARIO DE CONTACTO
 // FIX: todo el bloque envuelto en guard para evitar crash
 // en páginas que no tienen #contact-form (ej: seo.html)
@@ -152,30 +201,6 @@ function showFormSuccess() {
 
   setTimeout(() => msg.remove(), 6000);
 }
-
-// ============================================
-// ANIMACIONES AL SCROLL
-// ============================================
-
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px',
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('fade-in-up');
-      observer.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
-
-document.querySelectorAll('.service-card').forEach((card, index) => {
-  card.style.opacity = '0';
-  card.style.animationDelay = `${index * 50}ms`;
-  observer.observe(card);
-});
 
 // ============================================
 // TRACKING DE CONVERSIONES (Google Analytics 4)
